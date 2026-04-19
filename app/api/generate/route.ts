@@ -13,9 +13,9 @@ export async function POST(req: NextRequest) {
     const client = await getClient();
     const completion = await client.chat.completions.create({
       model: 'deepseek-chat',
-      messages: [{ role: 'user', content: 'You are an expert music composer and arranger. Generate a detailed musical composition.
-
-Input fields: genre, mood, tempo, instruments.' + "\\n\\nData: " + JSON.stringify(body) }],
+      messages: [{ role: 'user', content: `You are an expert music composer and arranger. Generate a detailed musical composition.
+Input fields: genre, mood, tempo, instruments.
+Data: ${JSON.stringify(body)}` }],
     });
     return NextResponse.json({ result: completion.choices[0].message.content });
   } catch(err: any) {
